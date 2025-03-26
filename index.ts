@@ -4,11 +4,16 @@ import http from 'http';
 import fs from 'fs';
 import {WebSocketServer, WebSocket} from 'ws';
 
+const debug = process.env.NODE_ENV === 'debug'
+const host = debug ? "0.0.0.0" : "localhost";
+
 const app = express();
-app.use(express.static('public'));
+
+if(debug)
+    app.use(express.static('public'));
 
 
-const server = process.env.NODE_ENV === 'debug' ?
+const server =  debug ?
     https.createServer({
         key: fs.readFileSync('certificate/private.key'),
         cert: fs.readFileSync('certificate/certificate.crt')
@@ -46,18 +51,20 @@ wss.on('connection', (ws) => {
     });
 });
 
-server.listen(3000, "0.0.0.0", () => {
-    // Get local IP
-    const os = require('os');
-    const ifaces = os.networkInterfaces();
-    let localIp = '';
-    Object.keys(ifaces).forEach(ifname => {
-        ifaces[ifname].forEach((iface: Record<string, unknown>) => {
-            if (iface.family === 'IPv4' && !iface.internal) {
-                localIp = iface.address as string;
-            }
-        });
-    });
+server.listen(3000, host, () => {
+    let localIp = host;
 
-    console.log(`Server started on https://${localIp}:3000`);
+    if(debug) {
+        const os = require('os');
+        const ifaces = os.networkInterfaces();
+        Object.keys(ifaces).forEach(ifname => {
+            ifaces[ifname].forEach((iface: Record<string, unknown>) => {
+                if (iface.family === 'IPv4' && !iface.internal) {
+                    localIp = iface.address as string;
+                }
+            });
+        });
+    }
+
+    console.log(`Server started on ${localIp}:3000`);
 });
