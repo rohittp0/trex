@@ -8,8 +8,10 @@
 </head>
 <body>
 <form id="connect">
-    <label for="gameId">Game ID</label><input type="text" id="gameId" placeholder="Game ID">
+    <label for="gameId">Game ID</label>
+    <input type="text" id="gameId" placeholder="Game ID" required pattern="[0-9]{4}">
     <button type="submit">Connect</button>
 </form>
+<div id="messages"></div>
 </body>
 </html>

@@ -7,8 +7,7 @@ ws.onopen = () => {
 };
 
 ws.onmessage = ({data}) => {
-    data = JSON.parse(data);
-    if(data.type === 'move' && data.direction === 'up') {
+    const {payload} = JSON.parse(data);
+    if (payload === 'jump')
         runner.jump()
-    }
 }
