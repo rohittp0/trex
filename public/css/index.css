@@ -53,6 +53,13 @@ body {
     line-height: 1.6;
 }
 
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
 /* Container for centering content and controlling width */
 .container {
     max-width: 600px;
@@ -63,7 +70,7 @@ body {
 
 /* Main heading */
 h1 {
-    font-size: 2.5rem;
+    font-size: 5.5rem;
     margin-bottom: 16px;
     color: #222;
 }
@@ -98,7 +105,7 @@ ol li {
 
 /* Game ID text block */
 .game-id-text {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 32px;
 }
 

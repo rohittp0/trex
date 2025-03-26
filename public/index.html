@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <!-- Ensures the page is displayed well on mobile devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <meta name="title" content="T-Rex">
     <meta name="description" content="T-Rex game controlled by your phone's jump motion.">
@@ -20,31 +20,36 @@
     <link rel="manifest" href="icons/site.webmanifest">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://trex.rohittp.com/" />
-    <meta property="og:title" content="T-Rex - Jump, JUMP!!!" />
-    <meta property="og:description" content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump." />
-    <meta property="og:image" content="https://trex.rohittp.com/images/cover.jpg" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://trex.rohittp.com/"/>
+    <meta property="og:title" content="T-Rex - Jump, JUMP!!!"/>
+    <meta property="og:description"
+          content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump."/>
+    <meta property="og:image" content="https://trex.rohittp.com/images/cover.jpg"/>
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://trex.rohittp.com/" />
-    <meta property="twitter:title" content="T-Rex - Jump, JUMP!!!" />
-    <meta property="twitter:description" content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump." />
-    <meta property="twitter:image" content="https://trex.rohittp.com/images/cover.jpg" />
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content="https://trex.rohittp.com/"/>
+    <meta property="twitter:title" content="T-Rex - Jump, JUMP!!!"/>
+    <meta property="twitter:description"
+          content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump."/>
+    <meta property="twitter:image" content="https://trex.rohittp.com/images/cover.jpg"/>
 
 
     <title>T-Rex</title>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/index.css"/>
 
     <!-- Defer your main game logic so HTML loads first -->
     <script defer src="js/index.js"></script>
 </head>
 <body>
 <div class="container">
-    <h1>T-Rex</h1>
+    <div class="title">
+        <img src="images/icon.jpg" alt="T-Rex Cover" class="icon" width="80" height="80"/>
+        <h1>T-Rex</h1>
+    </div>
 
     <p class="game-id-text">Your game ID: <span id="gameId" class="game-id"></span></p>
 
