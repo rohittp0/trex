@@ -1,36 +1,40 @@
-const protocol = location.protocol.replace("http", "ws")
-const ws = new WebSocket(`${protocol}//${location.host}`);
-const connectForm = document.getElementById("connect")
-const message = document.getElementById("messages")
-const motionDetector = new MotionDetector()
+const protocol = location.protocol.replace('http', 'ws');
+let ws = new WebSocket(`${protocol}//${location.host}`);
 
-let gameId = null
+const form = document.getElementById('connect');
+const gameIdInput = document.getElementById('gameId');
+const messages = document.getElementById('messages');
+const wsReady = new Promise((resolve) => ws.onopen = resolve);
 
-const connected = new Promise((resolve) => {
-    ws.onopen = () => connectForm.addEventListener("submit", (e) => {
-        e.preventDefault()
-        gameId = document.getElementById("gameId").value
-        ws.send(JSON.stringify({type: 'controller', actorId: gameId, payload: "start"}))
-        connectForm.style.display = "none"
-        message.innerText = `Connected to ${gameId}`
-        resolve()
-    })
-})
+// On form submit, open the WS connection
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const gameId = gameIdInput.value.trim();
+    if (!gameId) return;
 
-connected.then(() => motionDetector.start())
+    form.disabled = true;
+    messages.textContent = 'Connecting...';
+    await wsReady
+
+    ws.send(JSON.stringify({type: 'actor', actorId: gameId}));
+});
+
+ws.onmessage = ({data}) => {
+    const parsed = JSON.parse(data);
+    const {payload} = parsed;
+
+    if(payload.type === 'connected')
+        messages.textContent = 'Connected! Jump with your phone to control T-Rex!';
+    else if(payload.type === 'error')
+        messages.textContent = 'Error: ' + payload.message;
+
+    form.disabled = false;
+};
+
+ws.onerror = (err) => {
+    messages.textContent = `WebSocket error: ${err}`;
+};
 
 ws.onclose = () => {
-    message.innerText = "Connection closed"
-    connectForm.style.display = "block"
-    motionDetector.stop()
-}
-
-function jump(totalAcceleration) {
-    const payload = {
-        action: "jump",
-        velocity: Math.min(totalAcceleration * 0.75, 22)
-    }
-    ws.send(JSON.stringify({type: 'controller', actorId: gameId, payload}));
-}
-
-motionDetector.setOnJump(jump)
+    messages.textContent = 'Connection closed.';
+};

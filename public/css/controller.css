@@ -1,0 +1,75 @@
+/* General resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Container for alignment */
+.controller-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Heading */
+.controller-container h1 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: #222;
+}
+
+/* Connect form styles */
+.connect-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.connect-form label {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.connect-form input {
+    width: 220px;
+    padding: 8px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.connect-form button {
+    padding: 10px 18px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff; /* A bootstrap-like blue */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.connect-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Status messages */
+.messages {
+    min-height: 1.5em;
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #333;
+}
