@@ -1,11 +1,10 @@
 // runner/HorizonLine.js
-import { IS_HIDPI, FPS } from './constants.js';
+import {IS_HIDPI, FPS, DEFAULT_WIDTH, RunnerDefaultDimensions} from './constants.js';
 
 export class HorizonLine {
     static dimensions = {
-        WIDTH: 600,
+        WIDTH: DEFAULT_WIDTH,
         HEIGHT: 12,
-        YPOS: 127
     };
 
     constructor(canvas, bgImg) {
@@ -16,7 +15,7 @@ export class HorizonLine {
         this.sourceDimensions = {};
         this.sourceXPos = [0, 0];
         this.xPos = [0, 0];
-        this.yPos = this.dimensions.YPOS;
+        this.yPos = RunnerDefaultDimensions.HEIGHT - this.dimensions.HEIGHT;
         this.bumpThreshold = 0.5;
         this.setSourceDimensions();
         this.draw();

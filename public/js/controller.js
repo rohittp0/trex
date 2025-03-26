@@ -28,7 +28,7 @@ ws.onclose = () => {
 function jump(totalAcceleration) {
     const payload = {
         action: "jump",
-        velocity: totalAcceleration * 0.75
+        velocity: Math.min(totalAcceleration * 0.75, 22)
     }
     ws.send(JSON.stringify({type: 'controller', actorId: gameId, payload}));
 }

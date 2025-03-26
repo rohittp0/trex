@@ -142,7 +142,6 @@ export class Trex {
             this.update(0, Trex.status.JUMPING);
             this.jumpVelocity = -velocity;
             this.jumping = true;
-            console.log(-velocity);
         }
     }
 

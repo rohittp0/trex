@@ -1,6 +1,6 @@
 // runner/constants.js
 
-export const DEFAULT_WIDTH = 600;
+export const DEFAULT_WIDTH = 1200;
 export const FPS = 60;
 
 export const IS_HIDPI = window.devicePixelRatio > 1;
@@ -20,7 +20,6 @@ export const RunnerConfig = {
     MAX_CLOUDS: 6,
     MAX_OBSTACLE_LENGTH: 3,
     MAX_SPEED: 12,
-    MIN_JUMP_HEIGHT: 35,
     MOBILE_SPEED_COEFFICIENT: 1.2,
     RESOURCE_TEMPLATE_ID: 'audio-resources',
     SPEED: 6,
@@ -29,7 +28,7 @@ export const RunnerConfig = {
 
 export const RunnerDefaultDimensions = {
     WIDTH: DEFAULT_WIDTH,
-    HEIGHT: 150
+    HEIGHT: 600
 };
 
 // A few other sets of enumerations or static objects:

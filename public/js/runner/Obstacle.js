@@ -1,7 +1,7 @@
 // runner/Obstacle.js
 import { getRandomNum } from './utils.js';
-import { CollisionBox, boxCompare, createAdjustedCollisionBox } from './CollisionBox.js';
-import { FPS, IS_HIDPI } from './constants.js';
+import { CollisionBox } from './CollisionBox.js';
+import {FPS, IS_HIDPI, RunnerDefaultDimensions} from './constants.js';
 
 export class Obstacle {
     static MAX_GAP_COEFFICIENT = 1.5;
@@ -13,7 +13,6 @@ export class Obstacle {
             type: 'CACTUS_SMALL',
             width: 17,
             height: 35,
-            yPos: 105,
             multipleSpeed: 3,
             minGap: 180,
             collisionBoxes: [
@@ -26,7 +25,6 @@ export class Obstacle {
             type: 'CACTUS_LARGE',
             width: 25,
             height: 50,
-            yPos: 90,
             multipleSpeed: 6,
             minGap: 180,
             collisionBoxes: [
@@ -46,11 +44,10 @@ export class Obstacle {
         this.dimensions = dimensions;
         this.remove = false;
         this.xPos = 0;
-        this.yPos = this.typeConfig.yPos;
+        this.yPos = RunnerDefaultDimensions.HEIGHT - this.typeConfig.height;
         this.width = 0;
         this.collisionBoxes = [];
         this.gap = 0;
-        this.followingObstacleCreated = false;
         this.init(speed);
     }
 
