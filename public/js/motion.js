@@ -2,7 +2,6 @@ class MotionDetector {
     onJump = null
 
     start() {
-
     }
 
     setOnJump(onJump) {
