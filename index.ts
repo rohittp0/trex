@@ -1,15 +1,19 @@
 import express from 'express';
 import https from 'https';
+import http from 'http';
 import fs from 'fs';
 import {WebSocketServer, WebSocket} from 'ws';
 
 const app = express();
 app.use(express.static('public'));
 
-const server = https.createServer({
-    key: fs.readFileSync('certificate/private.key'),
-    cert: fs.readFileSync('certificate/certificate.crt')
-}, app);
+
+const server = process.env.NODE_ENV === 'debug' ?
+    https.createServer({
+        key: fs.readFileSync('certificate/private.key'),
+        cert: fs.readFileSync('certificate/certificate.crt')
+    }, app)
+    : http.createServer(app);
 
 const wss = new WebSocketServer({server});
 

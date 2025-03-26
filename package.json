@@ -4,11 +4,14 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "bun run index.ts"
+    "watch": "bun --watch index.ts",
+    "start": "bun index.ts",
+    "dev": "cross-env NODE_ENV=debug bun watch"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/express": "^5.0.1"
+    "@types/express": "^5.0.1",
+    "cross-env": "^7.0.3"
   },
   "peerDependencies": {
     "typescript": "^5"
