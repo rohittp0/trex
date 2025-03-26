@@ -1,5 +1,10 @@
+if (/Mobi|Android/i.test(navigator.userAgent)) {
+    window.location.replace('/controller.html');
+}
+
 const gameId = Math.floor(1000 + Math.random() * 9000).toString();
 document.getElementById('gameId').textContent = gameId;
+document.getElementById('origin').textContent = location.origin;
 
 const protocol = location.protocol.replace("http", "ws")
 const ws = new WebSocket(`${protocol}//${location.host}`);

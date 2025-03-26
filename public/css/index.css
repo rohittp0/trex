@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Segoe UI Regular'), url('../font/Segoe UI.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Segoe UI Bold';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Segoe UI Bold'), url('../font/Segoe UI Bold.woff') format('woff');
+}
+
+/* Highlight the game ID */
+
+#gameId {
+    font-family: 'Segoe UI Bold', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: #d9534f; /* A bootstrap-like 'danger' red, tweak as needed */
+}
+
+/* Controller link styling */
+
+a {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+/* Reset default margins/padding and set box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container for centering content and controlling width */
+.container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Main heading */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    color: #222;
+}
+
+/* Author text, slightly styled */
+.author {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 24px;
+    font-size: 1rem;
+}
+
+/* Description paragraph styling */
+.description {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+/* Ordered list for instructions */
+ol {
+    text-align: left; /* left-align steps for readability */
+    margin: 0 auto 24px;
+    display: inline-block;
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+/* Style each list item with a bit of spacing */
+ol li {
+    margin-bottom: 8px;
+}
+
+/* Game ID text block */
+.game-id-text {
+    font-size: 1.2rem;
+    margin-bottom: 32px;
+}
+

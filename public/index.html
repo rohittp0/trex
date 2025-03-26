@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trex</title>
+    <meta charset="UTF-8" />
+    <!-- Ensures the page is displayed well on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Basic meta tags -->
+    <meta name="description" content="T-Rex game controlled by your phone's jump motion." />
+    <meta name="author" content="Rohit T P" />
+
+    <title>T-Rex</title>
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="css/index.css" />
+
+    <!-- Defer your main game logic so HTML loads first -->
     <script defer src="js/index.js"></script>
 </head>
 <body>
-<h1>T-rex</h1>
-<p>Your game ID: <span id="gameId"></span></p>
-<p>Use this ID to connect your controller.</p>
-<a href="controller.html">Open Controller</a>
+<div class="container">
+    <h1>T-Rex</h1>
+
+    <p class="game-id-text">Your game ID: <span id="gameId" class="game-id"></span></p>
+
+    <p class="description">
+        Welcome to T-Rex! This is the chrome dinosaur game, but with a twist.
+        The T-Rex jumps when you jump in real life. To play, follow the steps below.
+    </p>
+    <ol>
+        <li>Open this page on your <strong>laptop</strong>. ✅</li>
+        <li>Open <strong id="origin"></strong> on your phone.</li>
+        <li>Enter the Game ID to connect your phone to the laptop.</li>
+        <li>Press any key on the laptop to start the game</li>
+        <li>Start Jumping!!</li>
+    </ol>
+</div>
 </body>
 </html>
