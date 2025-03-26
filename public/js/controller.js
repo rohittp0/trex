@@ -1,5 +1,5 @@
 const protocol = location.protocol.replace('http', 'ws');
-let ws = new WebSocket(`${protocol}//${location.host}`);
+let ws = new WebSocket(`${protocol}//${location.host}/ws`);
 
 const form = document.getElementById('connect');
 const gameIdInput = document.getElementById('gameId');

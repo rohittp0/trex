@@ -7,7 +7,7 @@ document.getElementById('gameId').textContent = gameId;
 document.getElementById('origin').textContent = location.origin;
 
 const protocol = location.protocol.replace("http", "ws")
-const ws = new WebSocket(`${protocol}//${location.host}`);
+const ws = new WebSocket(`${protocol}//${location.host}/ws`);
 
 ws.onopen = () => {
     ws.send(JSON.stringify({type: 'actor', actorId: gameId}));
