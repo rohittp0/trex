@@ -15,7 +15,7 @@ export class Obstacle {
             height: 35,
             yPos: 105,
             multipleSpeed: 3,
-            minGap: 120,
+            minGap: 180,
             collisionBoxes: [
                 new CollisionBox(0, 7, 5, 27),
                 new CollisionBox(4, 0, 6, 34),
@@ -28,7 +28,7 @@ export class Obstacle {
             height: 50,
             yPos: 90,
             multipleSpeed: 6,
-            minGap: 120,
+            minGap: 180,
             collisionBoxes: [
                 new CollisionBox(0, 12, 7, 38),
                 new CollisionBox(8, 0, 7, 49),

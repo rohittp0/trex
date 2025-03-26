@@ -25,9 +25,12 @@ ws.onclose = () => {
     motionDetector.stop()
 }
 
-function jump() {
-    console.log("jump")
-    ws.send(JSON.stringify({type: 'controller', actorId: gameId, payload: "jump"}));
+function jump(totalAcceleration) {
+    const payload = {
+        action: "jump",
+        velocity: totalAcceleration * 0.75
+    }
+    ws.send(JSON.stringify({type: 'controller', actorId: gameId, payload}));
 }
 
 motionDetector.setOnJump(jump)

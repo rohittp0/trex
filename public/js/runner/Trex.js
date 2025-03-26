@@ -1,16 +1,12 @@
 // runner/Trex.js
-import { IS_HIDPI, RunnerDefaultDimensions, RunnerConfig, FPS } from './constants.js';
-import { getTimeStamp } from './utils.js';
+import {IS_HIDPI, RunnerDefaultDimensions, RunnerConfig, FPS} from './constants.js';
+import {getTimeStamp} from './utils.js';
 
 export class Trex {
     static config = {
-        DROP_VELOCITY: -5,
         GRAVITY: 0.6,
         HEIGHT: 47,
-        INIITAL_JUMP_VELOCITY: -10,
         INTRO_DURATION: 1500,
-        MAX_JUMP_HEIGHT: 30,
-        MIN_JUMP_HEIGHT: 30,
         SPEED_DROP_COEFFICIENT: 3,
         SPRITE_WIDTH: 262,
         START_X_POS: 50,
@@ -19,12 +15,12 @@ export class Trex {
 
     static collisionBoxes = [
         // x, y, width, height
-        { x: 1,  y: -1, width: 30, height: 26 },
-        { x: 32, y: 0,  width: 8,  height: 16 },
-        { x: 10, y: 35, width: 14, height: 8 },
-        { x: 1,  y: 24, width: 29, height: 5 },
-        { x: 5,  y: 30, width: 21, height: 4 },
-        { x: 9,  y: 34, width: 15, height: 4 }
+        {x: 1, y: -1, width: 30, height: 26},
+        {x: 32, y: 0, width: 8, height: 16},
+        {x: 10, y: 35, width: 14, height: 8},
+        {x: 1, y: 24, width: 29, height: 5},
+        {x: 5, y: 30, width: 21, height: 4},
+        {x: 9, y: 34, width: 15, height: 4}
     ];
 
     static status = {
@@ -35,10 +31,10 @@ export class Trex {
     };
 
     static animFrames = {
-        WAITING: { frames: [44, 0],     msPerFrame: 1000 / 3 },
-        RUNNING: { frames: [88, 132],   msPerFrame: 1000 / 12 },
-        CRASHED: { frames: [220],       msPerFrame: 1000 / 60 },
-        JUMPING: { frames: [0],         msPerFrame: 1000 / 60 },
+        WAITING: {frames: [44, 0], msPerFrame: 1000 / 3},
+        RUNNING: {frames: [88, 132], msPerFrame: 1000 / 12},
+        CRASHED: {frames: [220], msPerFrame: 1000 / 60},
+        JUMPING: {frames: [0], msPerFrame: 1000 / 60},
     };
 
     static BLINK_TIMING = 7000;
@@ -60,8 +56,6 @@ export class Trex {
         this.status = Trex.status.WAITING;
         this.jumping = false;
         this.jumpVelocity = 0;
-        this.reachedMinHeight = false;
-        this.speedDrop = false;
         this.jumpCount = 0;
         this.playingIntro = false;
         this.init();
@@ -69,10 +63,8 @@ export class Trex {
 
     init() {
         this.blinkDelay = this.setBlinkDelay();
-        this.groundYPos =
-            RunnerDefaultDimensions.HEIGHT - this.config.HEIGHT - RunnerConfig.BOTTOM_PAD;
+        this.groundYPos = RunnerDefaultDimensions.HEIGHT - this.config.HEIGHT - RunnerConfig.BOTTOM_PAD;
         this.yPos = this.groundYPos;
-        this.minJumpHeight = this.groundYPos - this.config.MIN_JUMP_HEIGHT;
         this.draw(0, 0);
         this.update(0, Trex.status.WAITING);
     }
@@ -145,19 +137,12 @@ export class Trex {
         }
     }
 
-    startJump() {
+    startJump(velocity) {
         if (!this.jumping) {
             this.update(0, Trex.status.JUMPING);
-            this.jumpVelocity = this.config.INIITAL_JUMP_VELOCITY;
+            this.jumpVelocity = -velocity;
             this.jumping = true;
-            this.reachedMinHeight = false;
-            this.speedDrop = false;
-        }
-    }
-
-    endJump() {
-        if (this.reachedMinHeight && this.jumpVelocity < this.config.DROP_VELOCITY) {
-            this.jumpVelocity = this.config.DROP_VELOCITY;
+            console.log(-velocity);
         }
     }
 
@@ -165,21 +150,9 @@ export class Trex {
         const msPerFrame = Trex.animFrames[this.status].msPerFrame;
         const framesElapsed = deltaTime / msPerFrame;
 
-        if (this.speedDrop) {
-            this.yPos += Math.round(
-                this.jumpVelocity * this.config.SPEED_DROP_COEFFICIENT * framesElapsed
-            );
-        } else {
-            this.yPos += Math.round(this.jumpVelocity * framesElapsed);
-        }
+        this.yPos += Math.round(this.jumpVelocity * framesElapsed);
         this.jumpVelocity += runnerConfig.GRAVITY * framesElapsed;
 
-        if (this.yPos < this.minJumpHeight || this.speedDrop) {
-            this.reachedMinHeight = true;
-        }
-        if (this.yPos < this.config.MAX_JUMP_HEIGHT || this.speedDrop) {
-            this.endJump();
-        }
         if (this.yPos > this.groundYPos) {
             this.reset();
             this.jumpCount++;
@@ -187,17 +160,11 @@ export class Trex {
         this.update(deltaTime);
     }
 
-    setSpeedDrop() {
-        this.speedDrop = true;
-        this.jumpVelocity = 1;
-    }
-
     reset() {
         this.yPos = this.groundYPos;
         this.jumpVelocity = 0;
         this.jumping = false;
         this.update(0, Trex.status.RUNNING);
-        this.speedDrop = false;
         this.jumpCount = 0;
     }
 }

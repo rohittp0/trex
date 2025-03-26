@@ -5,7 +5,6 @@ import {
     RunnerDefaultDimensions,
     RunnerClasses,
     RunnerEvents,
-    RunnerKeycodes,
     RunnerImageSources,
     RunnerSounds,
     IS_MOBILE,
@@ -221,7 +220,6 @@ export class Runner {
                 this.horizon.update(deltaTime, this.currentSpeed, hasObstacles);
             }
 
-            // Example collision check (pseudocode):
             const firstObstacle = this.horizon.obstacles[0];
             if (hasObstacles && firstObstacle) {
                 const collision = checkForCollision(firstObstacle, this.tRex, this.canvasCtx);
@@ -337,62 +335,30 @@ export class Runner {
         }
     }
 
-    jump() {
+    jump(velocity) {
         if (!this.activated || this.tRex.jumping) return;
         this.playSound(this.soundFx.BUTTON_PRESS);
-        this.tRex.startJump();
+        this.tRex.startJump(velocity);
     }
 
-    onKeyDown(e) {
-        if (
-            !this.crashed &&
-            (RunnerKeycodes.JUMP[String(e.keyCode)] ||
-                e.type === RunnerEvents.TOUCHSTART)
-        ) {
+    onKeyDown() {
+        if (!this.crashed) {
             if (!this.activated) {
                 this.loadSounds();
                 this.activated = true;
                 this.playSound(this.soundFx.BUTTON_PRESS);
-                this.tRex.startJump();
+                this.tRex.startJump(10);
             }
         }
         // Touch to restart after crash
-        if (
-            this.crashed &&
-            e.type === RunnerEvents.TOUCHSTART &&
-            e.currentTarget === this.containerEl
-        ) {
+        if (this.crashed)
             this.restart();
-        }
-        // Duck
-        if (RunnerKeycodes.DUCK[e.keyCode] && this.tRex.jumping) {
-            e.preventDefault();
-            this.tRex.setSpeedDrop();
-        }
     }
 
-    onKeyUp(e) {
-        const keyCode = String(e.keyCode);
-        const isjumpKey =
-            RunnerKeycodes.JUMP[keyCode] ||
-            e.type === RunnerEvents.TOUCHEND ||
-            e.type === RunnerEvents.MOUSEUP;
-
-        if (this.isRunning() && isjumpKey) {
-            this.tRex.endJump();
-        } else if (RunnerKeycodes.DUCK[keyCode]) {
-            this.tRex.speedDrop = false;
-        } else if (this.crashed) {
-            const deltaTime = getTimeStamp() - this.time;
-            if (
-                RunnerKeycodes.RESTART[keyCode] ||
-                (e.type === RunnerEvents.MOUSEUP && e.target === this.canvas) ||
-                (deltaTime >= this.config.GAMEOVER_CLEAR_TIME &&
-                    RunnerKeycodes.JUMP[keyCode])
-            ) {
-                this.restart();
-            }
-        } else if (this.paused && isjumpKey) {
+    onKeyUp() {
+        if (this.crashed) {
+            this.restart();
+        } else if (this.paused) {
             this.play();
         }
     }

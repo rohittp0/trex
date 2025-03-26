@@ -6,7 +6,6 @@ export const FPS = 60;
 export const IS_HIDPI = window.devicePixelRatio > 1;
 export const IS_MOBILE = /Mobi|Android/i.test(window.navigator.userAgent);
 export const IS_IOS = /UIWebViewForStaticFileContent/i.test(window.navigator.userAgent);
-export const IS_TOUCH_ENABLED = 'ontouchstart' in window;
 
 export const RunnerConfig = {
     ACCELERATION: 0.001,
@@ -15,7 +14,7 @@ export const RunnerConfig = {
     CLEAR_TIME: 3000,
     CLOUD_FREQUENCY: 0.5,
     GAMEOVER_CLEAR_TIME: 750,
-    GAP_COEFFICIENT: 0.6,
+    GAP_COEFFICIENT: 1,
     GRAVITY: 0.6,
     INITIAL_JUMP_VELOCITY: 12,
     MAX_CLOUDS: 6,

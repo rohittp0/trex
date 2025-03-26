@@ -11,6 +11,6 @@ ws.onopen = () => {
 
 ws.onmessage = ({data}) => {
     const {payload} = JSON.parse(data);
-    if (payload === 'jump')
-        runner.jump()
+    if (payload.action === 'jump')
+        runner.jump(payload.velocity)
 }
