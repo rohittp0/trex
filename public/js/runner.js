@@ -365,6 +365,13 @@ class Runner {
         }
     }
 
+    jump() {
+        if (!this.activated || this.tRex.jumping) return
+
+        this.playSound(this.soundFx.BUTTON_PRESS);
+        this.tRex.startJump();
+    }
+
     /**
      * Process keydown.
      * @param {Event} e
@@ -375,11 +382,10 @@ class Runner {
             if (!this.activated) {
                 this.loadSounds();
                 this.activated = true;
-            }
-            if (!this.tRex.jumping) {
                 this.playSound(this.soundFx.BUTTON_PRESS);
                 this.tRex.startJump();
             }
+
         }
         if (this.crashed && e.type === Runner.events.TOUCHSTART &&
             e.currentTarget === this.containerEl) {
