@@ -1,11 +1,16 @@
 import express from 'express';
-import http from 'http';
+import https from 'https';
+import fs from 'fs';
 import {WebSocketServer, WebSocket} from 'ws';
 
 const app = express();
 app.use(express.static('public'));
 
-const server = http.createServer(app);
+const server = https.createServer({
+    key: fs.readFileSync('certificate/private.key'),
+    cert: fs.readFileSync('certificate/certificate.crt')
+}, app);
+
 const wss = new WebSocketServer({server});
 
 const actorMap = new Map<string, WebSocket>();
@@ -37,6 +42,18 @@ wss.on('connection', (ws) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log('Server running on port 3000.');
+server.listen(3000, "0.0.0.0", () => {
+    // Get local IP
+    const os = require('os');
+    const ifaces = os.networkInterfaces();
+    let localIp = '';
+    Object.keys(ifaces).forEach(ifname => {
+        ifaces[ifname].forEach((iface: Record<string, unknown>) => {
+            if (iface.family === 'IPv4' && !iface.internal) {
+                localIp = iface.address as string;
+            }
+        });
+    });
+
+    console.log(`Server started on https://${localIp}:3000`);
 });
