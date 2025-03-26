@@ -3,9 +3,9 @@ class MotionDetector {
         this.onJump = null;
 
         // Threshold for deciding an acceleration spike indicates a jump
-        this.ACCELERATION_THRESHOLD = 18; // approximate m/s^2 (this is tunable)
+        this.ACCELERATION_THRESHOLD = 14; // approximate m/s^2 (this is tunable)
         // Minimum time (ms) between consecutive jump detections
-        this.COOLDOWN_MS = 1500;
+        this.COOLDOWN_MS = 500;
 
         this.lastJumpTime = 0;
 
