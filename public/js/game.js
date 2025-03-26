@@ -1,3 +1,5 @@
+import { Runner } from './runner/Runner.js';
+
 const runner = new Runner('game');
 const protocol = location.protocol.replace("http", "ws")
 const ws = new WebSocket(`${protocol}//${location.host}`);
