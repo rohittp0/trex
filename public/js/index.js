@@ -7,8 +7,8 @@ ws.onopen = () => {
 };
 
 ws.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    if (data.type === 'start') {
+    const {payload} = JSON.parse(event.data);
+    if (payload === 'start') {
         window.location.href = "game.html?gameId=" + gameId;
     }
 };
