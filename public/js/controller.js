@@ -19,6 +19,12 @@ const connected = new Promise((resolve) => {
 
 connected.then(() => motionDetector.start())
 
+ws.onclose = () => {
+    message.innerText = "Connection closed"
+    connectForm.style.display = "block"
+    motionDetector.stop()
+}
+
 function jump() {
     console.log("jump")
     ws.send(JSON.stringify({type: 'controller', actorId: gameId, payload: "jump"}));
