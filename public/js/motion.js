@@ -1,4 +1,4 @@
-class MotionDetector {
+export class MotionDetector {
     constructor() {
         this.onJump = null;
 
