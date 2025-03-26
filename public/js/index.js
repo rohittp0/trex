@@ -1,7 +1,9 @@
 const gameId = Math.floor(1000 + Math.random() * 9000).toString();
 document.getElementById('gameId').textContent = gameId;
 
-const ws = new WebSocket(`ws://${location.host}`);
+const protocol = location.protocol.replace("http", "ws")
+const ws = new WebSocket(`${protocol}//${location.host}`);
+
 ws.onopen = () => {
     ws.send(JSON.stringify({type: 'actor', actorId: gameId}));
 };

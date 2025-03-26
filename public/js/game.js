@@ -1,5 +1,6 @@
 const runner = new Runner('game');
-const ws = new WebSocket(`ws://${location.host}`);
+const protocol = location.protocol.replace("http", "ws")
+const ws = new WebSocket(`${protocol}//${location.host}`);
 const gameId = new URLSearchParams(location.search).get('gameId');
 
 ws.onopen = () => {

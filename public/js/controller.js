@@ -1,4 +1,5 @@
-const ws = new WebSocket(`ws://${location.host}`);
+const protocol = location.protocol.replace("http", "ws")
+const ws = new WebSocket(`${protocol}//${location.host}`);
 const connectForm = document.getElementById("connect")
 const message = document.getElementById("messages")
 const motionDetector = new MotionDetector()
