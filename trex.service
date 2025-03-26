@@ -1,0 +1,16 @@
+[Unit]
+Description=Trex Game Service (Bun)
+After=network.target
+
+[Service]
+# The directory where your index.ts and package files reside
+WorkingDirectory=/home/ubuntu/trex
+
+# The command you want to run (start script)
+ExecStart=/usr/local/bin/bun index.ts
+
+# If you want the service to always restart on crashes:
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
