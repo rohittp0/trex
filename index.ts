@@ -9,11 +9,11 @@ const host = debug ? "0.0.0.0" : "localhost";
 
 const app = express();
 
-if(debug)
+if (debug)
     app.use(express.static('public'));
 
 
-const server =  debug ?
+const server = debug ?
     https.createServer({
         key: fs.readFileSync('certificate/private.key'),
         cert: fs.readFileSync('certificate/certificate.crt')
@@ -24,13 +24,20 @@ const wss = new WebSocketServer({server});
 
 const actorMap = new Map<string, WebSocket>();
 
-function onMessage(data: Record<string, string>) {
-    if (data.type === 'controller' && data.actorId && data.payload) {
-        const actorSocket = actorMap.get(data.actorId);
-        if (actorSocket && actorSocket.readyState === WebSocket.OPEN) {
-            actorSocket.send(JSON.stringify({from: 'controller', payload: data.payload}));
-        } else console.log("No actor with id: " + data.actorId);
-    }
+function onMessage(data: Record<string, string>, ws: WebSocket) {
+    if (data.type !== 'controller' || !data.actorId || !data.payload)
+        return;
+
+    const actorSocket = actorMap.get(data.actorId);
+
+    if (!actorSocket)
+        return ws.send(JSON.stringify({type: 'error', message: "Invalid Game ID"}));
+
+    if(actorSocket.readyState !== WebSocket.OPEN)
+        return ws.send(JSON.stringify({type: 'error', message: "Game Disconnected"}));
+
+    actorSocket.send(JSON.stringify({from: 'controller', payload: data.payload}));
+    ws.send(JSON.stringify({type: 'connected'}));
 }
 
 wss.on('connection', (ws) => {
@@ -38,23 +45,21 @@ wss.on('connection', (ws) => {
 
     ws.on('message', (msg) => {
         const data = JSON.parse(msg.toString());
-        if (data.type === 'actor' && data.actorId) {
-            actorId = data.actorId;
-            if (actorId) actorMap.set(actorId, ws);
-        } else onMessage(data);
+        actorId = data.actorId;
+
+        if (data.type === 'actor' && actorId) actorMap.set(actorId, ws);
+        else onMessage(data, ws);
     });
 
     ws.on('close', () => {
-        if (actorId) {
-            actorMap.delete(actorId);
-        }
+        if (actorId) actorMap.delete(actorId);
     });
 });
 
 server.listen(3000, host, () => {
     let localIp = host;
 
-    if(debug) {
+    if (debug) {
         const os = require('os');
         const ifaces = os.networkInterfaces();
         Object.keys(ifaces).forEach(ifname => {

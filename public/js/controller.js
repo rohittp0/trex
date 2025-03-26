@@ -3,6 +3,7 @@ let ws = new WebSocket(`${protocol}//${location.host}`);
 
 const form = document.getElementById('connect');
 const gameIdInput = document.getElementById('gameId');
+const submitButton = document.getElementById('submitButton');
 const messages = document.getElementById('messages');
 const wsReady = new Promise((resolve) => ws.onopen = resolve);
 
@@ -12,29 +13,30 @@ form.addEventListener('submit', async (e) => {
     const gameId = gameIdInput.value.trim();
     if (!gameId) return;
 
-    form.disabled = true;
+    submitButton.disabled = true;
     messages.textContent = 'Connecting...';
     await wsReady
 
-    ws.send(JSON.stringify({type: 'actor', actorId: gameId}));
+    ws.send(JSON.stringify({type: 'controller', actorId: gameId, payload: "start"}));
 });
 
 ws.onmessage = ({data}) => {
     const parsed = JSON.parse(data);
-    const {payload} = parsed;
 
-    if(payload.type === 'connected')
+    if(parsed.type === 'connected')
         messages.textContent = 'Connected! Jump with your phone to control T-Rex!';
-    else if(payload.type === 'error')
-        messages.textContent = 'Error: ' + payload.message;
-
-    form.disabled = false;
+    else if(parsed.type === 'error') {
+        messages.textContent = 'Error: ' + parsed.message;
+        submitButton.disabled = false;
+    }
 };
 
 ws.onerror = (err) => {
-    messages.textContent = `WebSocket error: ${err}`;
+    messages.textContent = `Connection error: ${err}, refresh and try again`;
+    submitButton.disabled = false;
 };
 
 ws.onclose = () => {
-    messages.textContent = 'Connection closed.';
+    messages.textContent = 'Connection closed, refresh and try again';
+    submitButton.disabled = false;
 };
