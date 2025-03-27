@@ -36,11 +36,12 @@ Originally inspired by the famous **Chrome offline T-Rex game**, we’ve given i
 
 ## Running Locally
 
+
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/yourusername/t-rex-motion-game.git
-cd t-rex-motion-game
+git clone https://github.com/rohittp0/trex
+cd trex
 ```
 
 ### 2. Install Dependencies
