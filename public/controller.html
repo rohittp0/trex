@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <title>T-Rex Controller</title>
 
     <meta name="title" content="T-Rex">
@@ -19,42 +20,45 @@
     <link rel="manifest" href="icons/site.webmanifest">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://trex.rohittp.com/"/>
-    <meta property="og:title" content="T-Rex - Jump, JUMP!!!"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://trex.rohittp.com/" />
+    <meta property="og:title" content="T-Rex - Jump, JUMP!!!" />
     <meta property="og:description"
-          content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump."/>
-    <meta property="og:image" content="https://trex.rohittp.com/images/cover.jpg"/>
+        content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump." />
+    <meta property="og:image" content="https://trex.rohittp.com/images/cover.jpg" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image"/>
-    <meta property="twitter:url" content="https://trex.rohittp.com/"/>
-    <meta property="twitter:title" content="T-Rex - Jump, JUMP!!!"/>
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://trex.rohittp.com/" />
+    <meta property="twitter:title" content="T-Rex - Jump, JUMP!!!" />
     <meta property="twitter:description"
-          content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump."/>
-    <meta property="twitter:image" content="https://trex.rohittp.com/images/cover.jpg"/>
+        content="Chrome's offline dino game but with a twist. The T-Rex jumps when you jump." />
+    <meta property="twitter:image" content="https://trex.rohittp.com/images/cover.jpg" />
 
     <!-- Link to the Controller CSS -->
-    <link rel="stylesheet" href="css/controller.css"/>
+    <link rel="stylesheet" href="css/controller.css" />
 
     <!-- Defer script execution so the DOM is ready first -->
     <script src="js/controller.js" type="module" defer></script>
 </head>
+
 <body>
+    <div class="controller-container">
+        <h1>T-Rex Controller</h1>
 
-<div class="controller-container">
-    <h1>T-Rex Controller</h1>
+        <!-- Connection form -->
+        <form id="connect" class="connect-form">
+            <label for="gameId">Game ID</label>
+            <input type="text" id="gameId" placeholder="4-digit code" required pattern="[0-9]{4}" />
+            <button type="submit" id="submitButton">Connect</button>
+        </form>
 
-    <!-- Connection form -->
-    <form id="connect" class="connect-form">
-        <label for="gameId">Game ID</label>
-        <input type="text" id="gameId" placeholder="4-digit code" required pattern="[0-9]{4}"/>
-        <button type="submit" id="submitButton">Connect</button>
-    </form>
+        <!-- Status / messages area -->
+        <div id="messages" class="messages"></div>
+    </div>
 
-    <!-- Status / messages area -->
-    <div id="messages" class="messages"></div>
-</div>
+
 
 </body>
+
 </html>
