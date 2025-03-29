@@ -11,20 +11,27 @@ body {
     background-color: #f5f5f5;
     color: #333;
     line-height: 1.5;
+    font-size: 1.6rem;
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
 }
 
 /* Container for alignment */
 .controller-container {
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 0 20px;
+    max-width: 90%; /* Slightly adjusted for better responsiveness */
+    padding: 100px;
     text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Heading */
 .controller-container h1 {
-    font-size: 2rem;
-    margin-bottom: 24px;
+    font-size: 2.5rem; /* Adjusted for readability */
+    margin-bottom: 16px;
     color: #222;
 }
 
@@ -33,43 +40,58 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 16px;
 }
 
-.connect-form label {
-    margin-bottom: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.connect-form input {
-    width: 220px;
-    padding: 8px;
-    font-size: 1rem;
+.connect-form input,
+.connect-form button {
+    width: 100%; /* Full width for small screens */
+    max-width: 300px;
+    padding: 14px;
+    font-size: 1.4rem; /* Adjusted for readability */
     margin-bottom: 12px;
-    border: 1px solid #ccc;
     border-radius: 4px;
+    border: 1px solid #ccc; /* Only for input */
+}
+
+#gameId {
+    border: 1px solid #ccc; /* Border for input */
+    background-color: #fff; /* Background for input */
+    color: black;
 }
 
 .connect-form button {
-    padding: 10px 18px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007bff; /* A bootstrap-like blue */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    background-color: #007bff; /* Only for button */
+    color: #fff; /* Only for button */
+    cursor: pointer; /* Only for button */
+    transition: background-color 0.2s ease; /* Only for button */
 }
 
 .connect-form button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Hover effect for button */
 }
 
 /* Status messages */
 .messages {
-    min-height: 1.5em;
-    margin-top: 12px;
-    font-size: 1rem;
-    color: #333;
+    font-size: 1.4rem; /* Adjusted for readability */
+    color: #ffffff;
+}
+
+/* Responsive Design for mobile view */
+@media (max-width: 767px) {
+    .controller-container {
+        max-width: 100%; /* Expand width for mobile view */
+        padding: 20px; /* Adjust padding for mobile */
+        font-size: 1.4rem; /* Adjust overall font size for better readability */
+    }
+
+    .controller-container h1 {
+        font-size: 2.5rem; /* Make heading larger on mobile */
+        margin-bottom: 16px; /* Adjust spacing */
+    }
+
+    .connect-form input,
+    .connect-form button {
+        max-width: 90%; /* Allow inputs and buttons to take more width */
+        padding: 16px; /* Make inputs and buttons larger */
+    }
 }
